@@ -22,6 +22,10 @@ body {
 	text-align: center;
 }
 
+.error{
+	color: red;
+}
+
 a.btn {
     -webkit-appearance: button;
     -moz-appearance: button;

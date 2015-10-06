@@ -12,20 +12,29 @@
 				<h3>Enter the Meal Details</h3>
 				<form name="myForm" novalidate ng-submit="submit()">
 					<p>	
-					<label for="baseMealPrice">Base Meal Price: $ </label>
-					<input type="number" name="baseMealPrice" ng-model="mealDetails.baseMealPrice" min="0"/>
+						<label for="baseMealPrice">Base Meal Price: $ </label>
+						<input type="number" name="baseMealPrice" ng-model="mealDetails.baseMealPrice" required />
+						<p class="error" ng-if="showErrors && myForm.$submitted && myForm.baseMealPrice.$error.required">
+    						Base Meal Price is required!
+						</p>
 					</p>
 					<p>
-					<label for="taxRate">Tax Rate: %</label>
-					<input type="number" name="taxRate" ng-model="mealDetails.taxRate" min="0" max="100"/>
+						<label for="taxRate">Tax Rate: %</label>
+						<input type="number" name="taxRate" ng-model="mealDetails.taxRate" min="0" max="100" required />
+						<p class="error" ng-if="showErrors && myForm.$submitted && myForm.taxRate.$error.required">
+    						Tax Rate is required!
+						</p>
 					</p>
 					<p>
-					<label for="tipPercentage">Tip Percentage: %</label>
-					<input type="number" name="tipPercentage" ng-model="mealDetails.tipPercentage" min="0" max="100"/>
+						<label for="tipPercentage">Tip Percentage: %</label>
+						<input type="number" name="tipPercentage" ng-model="mealDetails.tipPercentage" min="0" max="100" required />
+						<p class="error" ng-if="showErrors && myForm.$submitted && myForm.tipPercentage.$error.required">
+    						Tip Percentage is required!
+						</p>
 					</p>
 					<p>
-					<button>Submit</button>
-					<a class="btn" ng-click="clearInput()">Cancel</a>
+						<button>Submit</button>
+						<a class="btn" ng-click="clearInput()">Cancel</a>
 					</p>
 				</form>
 			</div>
