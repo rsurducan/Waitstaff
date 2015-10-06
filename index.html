@@ -6,40 +6,45 @@
 		<script src="script.js"></script>
 	</head>
 	<body ng-controller="myCtrl">
-		<h1>Waitstaff Calculator</h1>
-		<h3>Enter the Meal Details</h3>
-		<form name="myForm" novalidate ng-submit="submit()">
-			<p>	
-			<label for="baseMealPrice">Base Meal Price: $ </label>
-			<input type="number" name="baseMealPrice" ng-model="mealDetails.baseMealPrice" min="0"/>
-			</p>
-			<p>
-			<label for="taxRate">Tax Rate: %</label>
-			<input type="number" name="taxRate" ng-model="mealDetails.taxRate" min="0" max="100"/>
-			</p>
-			<p>
-			<label for="tipPercentage">Tip Percentage: %</label>
-			<input type="number" name="tipPercentage" ng-model="mealDetails.tipPercentage" min="0" max="100"/>
-			</p>
-			<p>
-			<button>Submit</button>
-			<a class="btn" ng-click="clearInput()">Cancel</a>
-			</p>
-		</form>
+		<div class="container center">
+			<h1>Waitstaff Calculator</h1>
+			<div class="column">
+				<h3>Enter the Meal Details</h3>
+				<form name="myForm" novalidate ng-submit="submit()">
+					<p>	
+					<label for="baseMealPrice">Base Meal Price: $ </label>
+					<input type="number" name="baseMealPrice" ng-model="mealDetails.baseMealPrice" min="0"/>
+					</p>
+					<p>
+					<label for="taxRate">Tax Rate: %</label>
+					<input type="number" name="taxRate" ng-model="mealDetails.taxRate" min="0" max="100"/>
+					</p>
+					<p>
+					<label for="tipPercentage">Tip Percentage: %</label>
+					<input type="number" name="tipPercentage" ng-model="mealDetails.tipPercentage" min="0" max="100"/>
+					</p>
+					<p>
+					<button>Submit</button>
+					<a class="btn" ng-click="clearInput()">Cancel</a>
+					</p>
+				</form>
+			</div>
+			<div class="column center">
+				<div>
+					<h3>Customer Charges</h3>
+					<p>Subtotal: {{ (customerCharges.subtotal || 0.00) | currency:"$" }}</p>
+					<p>Tip: {{ (customerCharges.tip || 0.00) | currency:"$"}}</p>
+					<p>Total: {{ (customerCharges.total || 0.00) | currency:"$" }}</p>
+				</div>
 
-		<div>
-			<h3>Customer Charges</h3>
-			<p>Subtotal: {{ (customerCharges.subtotal || 0.00) | currency:"$" }}</p>
-			<p>Tip: {{ (customerCharges.tip || 0.00) | currency:"$"}}</p>
-			<p>Total: {{ (customerCharges.total || 0.00) | currency:"$" }}</p>
+				<div>
+					<h3>My Earnings Info</h3>
+					<p>Tip Total: {{ (earningsInfo.tipTotal || 0.00) | currency:"$" }}</p>
+					<p>Meal count: {{ earningsInfo.mealCount || 0 }}</p>
+					<p>Average Tip Per Meal: {{ (earningsInfo.avgTip || 0.00) | currency:"$" }}</p>
+				</div>
+			</div>
+			<a class="btn" ng-click="reset()">Reset</a>
 		</div>
-
-		<div>
-			<h3>My Earnings Info</h3>
-			<p>Tip Total: {{ (earningsInfo.tipTotal || 0.00) | currency:"$" }}</p>
-			<p>Meal count: {{ earningsInfo.mealCount || 0 }}</p>
-			<p>Average Tip Per Meal: {{ (earningsInfo.avgTip || 0.00) | currency:"$" }}</p>
-		</div>
-		<a class="btn" ng-click="reset()">Reset</a>
 	</body>
 </html>
