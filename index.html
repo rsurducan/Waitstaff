@@ -13,9 +13,12 @@
 				<form name="myForm" novalidate ng-submit="submit()">
 					<p>	
 						<label for="baseMealPrice">Base Meal Price: $ </label>
-						<input type="number" name="baseMealPrice" ng-model="mealDetails.baseMealPrice" required />
+						<input type="number" name="baseMealPrice" ng-model="mealDetails.baseMealPrice" min="0.01" required />
 						<p class="error" ng-if="showErrors && myForm.$submitted && myForm.baseMealPrice.$error.required">
     						Base Meal Price is required!
+						</p>
+						<p class="error" ng-if="showErrors && myForm.$submitted && myForm.baseMealPrice.$error.min">
+    						A min price of 0.01 is required!
 						</p>
 					</p>
 					<p>
@@ -24,12 +27,24 @@
 						<p class="error" ng-if="showErrors && myForm.$submitted && myForm.taxRate.$error.required">
     						Tax Rate is required!
 						</p>
+						<p class="error" ng-if="showErrors && myForm.$submitted && myForm.taxRate.$error.min">
+    						Tax Rate is min 0!
+						</p>
+						<p class="error" ng-if="showErrors && myForm.$submitted && myForm.taxRate.$error.max">
+    						Tax Rate is max 100!
+						</p>
 					</p>
 					<p>
 						<label for="tipPercentage">Tip Percentage: %</label>
 						<input type="number" name="tipPercentage" ng-model="mealDetails.tipPercentage" min="0" max="100" required />
 						<p class="error" ng-if="showErrors && myForm.$submitted && myForm.tipPercentage.$error.required">
     						Tip Percentage is required!
+						</p>
+						<p class="error" ng-if="showErrors && myForm.$submitted && myForm.tipPercentage.$error.min">
+    						Tip Percentage is min 0!
+						</p>
+						<p class="error" ng-if="showErrors && myForm.$submitted && myForm.tipPercentage.$error.max">
+    						Tip Percentage is max 100!
 						</p>
 					</p>
 					<p>
