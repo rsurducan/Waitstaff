@@ -1,74 +1,18 @@
 <!DOCTYPE html>
-<html ng-app='myApp'>
+<html lang="en" ng-app='myApp'>
 	<head>
-		<script data-require="angular.js@1.3.11" data-semver="1.3.11" src="https://code.angularjs.org/1.3.11/angular.js"></script>
 		<link href="style.css" rel="stylesheet" />
-		<script src="script.js"></script>
 	</head>
-	<body ng-controller="myCtrl">
+	<body>
 		<div class="container center">
 			<h1>Waitstaff Calculator</h1>
-			<div class="column">
-				<h3>Enter the Meal Details</h3>
-				<form name="myForm" novalidate ng-submit="submit()">
-					<p>	
-						<label for="baseMealPrice">Base Meal Price: $ </label>
-						<input type="number" name="baseMealPrice" ng-model="mealDetails.baseMealPrice" min="0.01" required />
-						<p class="error" ng-if="showErrors && myForm.$submitted && myForm.baseMealPrice.$error.required">
-    						Base Meal Price is required!
-						</p>
-						<p class="error" ng-if="showErrors && myForm.$submitted && myForm.baseMealPrice.$error.min">
-    						A min price of 0.01 is required!
-						</p>
-					</p>
-					<p>
-						<label for="taxRate">Tax Rate: %</label>
-						<input type="number" name="taxRate" ng-model="mealDetails.taxRate" min="0" max="100" required />
-						<p class="error" ng-if="showErrors && myForm.$submitted && myForm.taxRate.$error.required">
-    						Tax Rate is required!
-						</p>
-						<p class="error" ng-if="showErrors && myForm.$submitted && myForm.taxRate.$error.min">
-    						Tax Rate is min 0!
-						</p>
-						<p class="error" ng-if="showErrors && myForm.$submitted && myForm.taxRate.$error.max">
-    						Tax Rate is max 100!
-						</p>
-					</p>
-					<p>
-						<label for="tipPercentage">Tip Percentage: %</label>
-						<input type="number" name="tipPercentage" ng-model="mealDetails.tipPercentage" min="0" max="100" required />
-						<p class="error" ng-if="showErrors && myForm.$submitted && myForm.tipPercentage.$error.required">
-    						Tip Percentage is required!
-						</p>
-						<p class="error" ng-if="showErrors && myForm.$submitted && myForm.tipPercentage.$error.min">
-    						Tip Percentage is min 0!
-						</p>
-						<p class="error" ng-if="showErrors && myForm.$submitted && myForm.tipPercentage.$error.max">
-    						Tip Percentage is max 100!
-						</p>
-					</p>
-					<p>
-						<button>Submit</button>
-						<a class="btn" ng-click="clearInput()">Cancel</a>
-					</p>
-				</form>
-			</div>
-			<div class="column center">
-				<div>
-					<h3>Customer Charges</h3>
-					<p>Subtotal: {{ (customerCharges.subtotal || 0.00) | currency:"$" }}</p>
-					<p>Tip: {{ (customerCharges.tip || 0.00) | currency:"$"}}</p>
-					<p>Total: {{ (customerCharges.total || 0.00) | currency:"$" }}</p>
-				</div>
-
-				<div>
-					<h3>My Earnings Info</h3>
-					<p>Tip Total: {{ (earningsInfo.tipTotal || 0.00) | currency:"$" }}</p>
-					<p>Meal count: {{ earningsInfo.mealCount || 0 }}</p>
-					<p>Average Tip Per Meal: {{ (earningsInfo.avgTip || 0.00) | currency:"$" }}</p>
-				</div>
-			</div>
-			<a class="btn" ng-click="reset()">Reset</a>
+		    <a href="#/">Home</a>
+    		<a href="#/new-meal">New Meal</a>
+    		<a href="#/my-earnings">My Earnings</a>
+    		<div ng-view></div>
 		</div>
+    	<script type="text/javascript" src="bower_components/angular/angular.js"></script>
+    	<script type="text/javascript" src="bower_components/angular-route/angular-route.js"></script>
+    	<script type="text/javascript" src="script.js"></script>
 	</body>
 </html>

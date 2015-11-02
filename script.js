@@ -1,34 +1,54 @@
-angular.module('myApp', [])
-.controller('myCtrl', function($scope) {
-    $scope.showErrors = true;
+angular.module('myApp', ['ngRoute'])
+    .config(['$routeProvider', function($routeProvider){
+        $routeProvider.when('/', {
+            templateUrl : 'home.html',
+            controller : 'HomeCtrl'
+        }).when('/new-meal', {
+            templateUrl : 'createMeal.html',
+            controller : 'CreateMealCtrl'
+        }).when('/my-earnings', {
+            templateUrl : 'displayEarnings.html',
+            controller : 'DisplayEarningsCtrl'
+        }).when('/error', {
+            template : '<p>Error - Page Not Found</p>'
+        }).otherwise('/error');
+    }])
+    .controller('HomeCtrl', function($scope) {
+       
+    })
+    .controller('CreateMealCtrl', function($scope, $rootScope) {
 
-    $scope.mealDetails = {};
-    $scope.customerCharges = {};
-    $scope.earningsInfo = {};
+        $rootScope.showErrors = true;
 
-    $scope.submit = function() {
-        $scope.showErrors = true;
-        if ($scope.myForm.$valid) {
-            $scope.customerCharges.subtotal = ($scope.mealDetails.baseMealPrice * (100 + $scope.mealDetails.taxRate)) / 100;
-            $scope.customerCharges.tip = ($scope.customerCharges.subtotal * $scope.mealDetails.tipPercentage) / 100;
-            $scope.customerCharges.total = $scope.customerCharges.subtotal + $scope.customerCharges.tip;
+        $rootScope.mealDetails = {};
+        $rootScope.customerCharges = {};
+        $rootScope.earningsInfo = {}; 
 
-            $scope.earningsInfo.tipTotal = ($scope.earningsInfo.tipTotal || 0.00) + $scope.customerCharges.tip;
-            $scope.earningsInfo.mealCount = ($scope.earningsInfo.mealCount || 0) + 1;
-            $scope.earningsInfo.avgTip = ($scope.earningsInfo.tipTotal || 0) / ($scope.earningsInfo.mealCount || 1);            
-        }
-    };
+        $scope.submit = function() {
+            $rootScope.showErrors = true;
+            if ($scope.myForm.$valid) {
+                $rootScope.customerCharges.subtotal = ($rootScope.mealDetails.baseMealPrice * (100 + $rootScope.mealDetails.taxRate)) / 100;
+                $rootScope.customerCharges.tip = ($rootScope.customerCharges.subtotal * $rootScope.mealDetails.tipPercentage) / 100;
+                $rootScope.customerCharges.total = $rootScope.customerCharges.subtotal + $rootScope.customerCharges.tip;
 
-    $scope.clearInput = function() {
-        $scope.mealDetails = {};
-        $scope.showErrors = false;
-    };
+                $rootScope.earningsInfo.tipTotal = ($rootScope.earningsInfo.tipTotal || 0.00) + $rootScope.customerCharges.tip;
+                $rootScope.earningsInfo.mealCount = ($rootScope.earningsInfo.mealCount || 0) + 1;
+                $rootScope.earningsInfo.avgTip = ($rootScope.earningsInfo.tipTotal || 0) / ($rootScope.earningsInfo.mealCount || 1);            
+            }
+        };
 
-    $scope.reset = function() {
-        $scope.mealDetails = {};
-        $scope.customerCharges = {};
-        $scope.earningsInfo = {};
-        $scope.showErrors = false;
-    };
+        $scope.clearInput = function() {
+            $rootScope.mealDetails = {};
+            $rootScope.showErrors = false;
+        };
 
-});
+    })
+    .controller('DisplayEarningsCtrl', function($scope, $rootScope) {
+
+        $scope.reset = function() {
+            $rootScope.mealDetails = {};
+            $rootScope.customerCharges = {};
+            $rootScope.earningsInfo = {};
+            $rootScope.showErrors = false;
+        };
+    });
