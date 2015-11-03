@@ -1,9 +1,5 @@
-<div class="column center">
-	<div>
-		<h3>My Earnings Info</h3>
-		<p>Tip Total: {{ (earningsInfo.tipTotal || 0.00) | currency:"$" }}</p>
-		<p>Meal count: {{ earningsInfo.mealCount || 0 }}</p>
-		<p>Average Tip Per Meal: {{ (earningsInfo.avgTip || 0.00) | currency:"$" }}</p>
-	</div>
-	<a class="btn" ng-click="reset()">Reset</a>	
-</div>
+<h3>My Earnings Info</h3>
+<p>Tip Total: {{ (earningsInfo.tipTotal || 0.00) | currency:"$" }}</p>
+<p>Meal count: {{ earningsInfo.mealCount || 0 }}</p>
+<p>Average Tip Per Meal: {{ (earningsInfo.avgTip || 0.00) | currency:"$" }}</p>
+<a class="btn" ng-click="reset()">Reset</a>	
